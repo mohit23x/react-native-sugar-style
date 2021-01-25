@@ -8,7 +8,7 @@
         "type": "git",
         "url": "https://github.com/mohit23x/react-native-sugar-style.git"
     },
-    "main": "build/index.js",
+    "main": "index.js",
     "files": [
         "index.js",
         "index.ts"

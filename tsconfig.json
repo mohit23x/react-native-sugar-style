@@ -7,8 +7,8 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "declaration": true,
-    "outDir": "build",
+    "outDir": "./",
   },
-  "files": ["lib/index.ts"],
+  "files": ["index.ts"],
   "exclude": ["example", "node_modules"]
 }
