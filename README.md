@@ -1,0 +1,5 @@
+-   add orientation support
+-   refactor types for named styles
+-   stop rerendering when same theme is applied again
+-   caching stylesheets
+-   add device pixel ratio to constant
