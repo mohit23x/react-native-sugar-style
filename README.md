@@ -17,7 +17,7 @@ npm i react-native-sugar-style
 ```
 
 #### Setup
-style.tsx - define a configuration for you theme
+**style.tsx** - define a configuration for you theme
 ```javascript
 import  {Sugar, constants} from 'react-native-sugar-style'
 
@@ -32,7 +32,7 @@ const StyleSheet = new Sugar<Theme>(theme);
 
 export default StyleSheet;
 ```
-component.tsx - use StyleSheet as you do normally
+**component.tsx** - use StyleSheet as you do normally
 ```javascript
 
 import React from 'react';
@@ -40,9 +40,9 @@ import {View, Text} from 'react-native';
 import StyleSheet from './style';
 
 const Component = () => (
-	<View style={styles.container}>
-		<Text style={styles.text}>Hello World</Text>
-	</View>
+  <View style={styles.container}>
+    <Text style={styles.text}>Hello World</Text>
+  </View>
 )
 
 const styles = StyleSheet.create((theme) => ({
