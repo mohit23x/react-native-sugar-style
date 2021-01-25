@@ -33,7 +33,7 @@ const os = {
   windows: Platform.OS === 'windows',
 } as const;
 
-export const constant = {
+export const constants = {
   constant: {
     height,
     width,

@@ -2,12 +2,12 @@ import * as React from "react"
 import { View } from "react-native"
 import Sugar from "./Sugar"
 
-export const ProviderView = ({
+export const SugarProvider: React.FC<{
+    sugar: Sugar<any>
+    children: React.ReactNode | React.ReactNode[]   
+}> = ({
     sugar,
     children
-}: {
-    sugar: Sugar<any>
-    children: React.ReactNode | React.ReactNode[]
 }) => {
     const [count, render] = React.useState(1)
 

@@ -1,4 +1,4 @@
-export declare const constant: {
+export declare const constants: {
     readonly constant: {
         readonly height: number;
         readonly width: number;
