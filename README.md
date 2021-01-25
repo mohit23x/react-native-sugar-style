@@ -1,8 +1,10 @@
 # React Native Sugar Style
 Theme based alternative for React Native StyleSheet. (🧪 Experimental)
 
+Before:
 ![Before](assets/before.png "Before")
 
+After:
 ![After](assets/after.png "After")
 
 
@@ -60,11 +62,11 @@ const styles = StyleSheet.create((theme) => ({
 
 #### TODO
 
-[ ]   add orientation support
-[ ]   refactor types for named styles
-[ ]   stop re-rendering when same theme is applied again
-[ ]   caching stylesheets
-[ ]   add device pixel ratio to constant
+- add orientation support
+- refactor types for named styles
+- stop re-rendering when same theme is applied again
+- caching stylesheets
+- add device pixel ratio to constant
 
 
 #### Acknowledgement
