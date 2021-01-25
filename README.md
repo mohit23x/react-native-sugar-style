@@ -46,15 +46,15 @@ const Component = () => (
 )
 
 const styles = StyleSheet.create((theme) => ({
-	container: {
-		height: theme.constant.height,
-		width: theme.constant.width,
-		backgroundColor: theme.background,
-	},
-	text: {
-	    fontSize: theme.font.size,
-		color: theme.text
-	}
+  container: {
+    height: theme.constant.height,
+    width: theme.constant.width,
+    backgroundColor: theme.background,
+  },
+  text: {
+    fontSize: theme.font.size,
+    color: theme.text
+  }
 }))
 
 
