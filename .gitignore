@@ -1,2 +1,67 @@
 node_modules
 .vscode
+
+# OSX
+#
+example/.DS_Store
+
+# Xcode
+#
+example/build/
+example/*.pbxuser
+example/!default.pbxuser
+example/*.mode1v3
+example/!default.mode1v3
+example/*.mode2v3
+example/!default.mode2v3
+example/*.perspectivev3
+example/!default.perspectivev3
+example/xcuserdata
+example/*.xccheckout
+example/*.moved-aside
+example/DerivedData
+example/*.hmap
+example/*.ipa
+example/*.xcuserstate
+example/project.xcworkspace
+
+# Android/IntelliJ
+#
+example/build/
+example/.idea
+example/.gradle
+example/local.properties
+example/*.iml
+
+# node.js
+#
+example/node_modules/
+example/npm-debug.log
+example/yarn-error.log
+
+# BUCK
+example/buck-out/
+example/\.buckd/
+example/*.keystore
+example/!debug.keystore
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
+
+# Bundle artifacts
+*.jsbundle
+
+# CocoaPods
+/ios/Pods/
+
+# Expo
+.expo/*
+web-build/

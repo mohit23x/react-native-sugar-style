@@ -1,0 +1,10 @@
+{
+  "name": "React Native Sugar Style",
+  "displayName": "RN Sugar Style",
+  "expo": {
+    "name": "react-native-sugar-style",
+    "slug": "react-native-sugar-style",
+    "version": "1.0.1",
+    "assetBundlePatterns": ["**/*"]
+  }
+}
