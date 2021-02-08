@@ -43,6 +43,7 @@ export const constants = {
     isNavBarVisible,
     visibleHeight,
     isIPhoneX,
-    os,      
+    os,
+    statusBarHeight
   }
 } as const;
