@@ -1,4 +1,4 @@
-import {Dimensions, Platform, StatusBar} from 'react-native';
+import { Dimensions, Platform, StatusBar } from 'react-native';
 const { height, width } = Dimensions.get('window');
 
 /* =========== */
@@ -21,7 +21,7 @@ const statusBarHeight = Platform.select({
 });
 /* ====== x ====== */
 
-const {height: screenHeight, width: screenWidth} = Dimensions.get('screen');
+const { height: screenHeight, width: screenWidth } = Dimensions.get('screen');
 const navBarHeight = screenHeight - statusBarHeight - height;
 const isNavBarVisible = navBarHeight > 0;
 const visibleHeight = height - navBarHeight;
@@ -44,6 +44,6 @@ export const constants = {
     visibleHeight,
     isIPhoneX,
     os,
-    statusBarHeight
-  }
+    statusBarHeight,
+  },
 } as const;
