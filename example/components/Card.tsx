@@ -10,7 +10,7 @@ export default function Card() {
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create(theme => ({
   container: {
     height: 250,
     backgroundColor: theme.surface,
@@ -18,10 +18,11 @@ const styles = StyleSheet.create((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: theme.borderRadius.m,
+    marginTop: theme.constant.statusBarHeight
   },
   text: {
     color: theme.text,
     fontWeight: "700",
-    fontSize: theme.fontSize.l,
-  },
+    fontSize: theme.fontSize.l
+  }
 }));

@@ -4,6 +4,7 @@ import { StyleSheet, lightTheme, darkTheme } from "../style";
 
 export default function Toggle() {
   const isLight = StyleSheet.theme.name === "light";
+
   const onPress = () => {
     StyleSheet.build(isLight ? darkTheme : lightTheme);
   };
