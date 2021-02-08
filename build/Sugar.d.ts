@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import type { S, Fn } from './type';
+import { S, Fn, buildEventType } from './type';
 import Sheet from './Sheet';
-declare const BUILD_EVENT: "build";
 export default class Sugar<T> {
     builded: boolean;
     theme: T;
@@ -95,11 +94,10 @@ export default class Sugar<T> {
      */
     flatten: typeof StyleSheet.flatten;
     constructor(newTheme: T);
-    buildTheme(themeObj: T): void;
+    build(themeObj: T): void;
     create(objFn: Fn<T, S> | S): S;
     _calcSheets(): void;
-    _callListeners(event: typeof BUILD_EVENT): void;
-    subscribe(event: typeof BUILD_EVENT, listener: () => any): void;
-    _assertSubscriptionParams(event: typeof BUILD_EVENT, listener: any): void;
+    _callListeners(event: buildEventType): void;
+    subscribe(event: buildEventType, listener: () => any): void;
+    _assertSubscriptionParams(event: buildEventType, listener: any): void;
 }
-export {};

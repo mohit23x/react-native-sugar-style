@@ -1,14 +1,14 @@
 {
   "name": "react-native-sugar-style",
-  "version": "0.0.7",
-  "description": "React Native Stylesheet alternative with theme",
+  "version": "0.0.8",
+  "description": "React Native Stylesheet alternative with theme support",
   "author": "mohit23x",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/mohit23x/react-native-sugar-style.git"
   },
-  "main": "index.js",
+  "main": "./build/index.js",
   "scripts": {
     "prepare": "npm run build",
     "build": "tsc"
