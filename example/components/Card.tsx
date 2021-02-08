@@ -22,6 +22,6 @@ const styles = StyleSheet.create((theme) => ({
   text: {
     color: theme.text,
     fontWeight: "700",
-    fontSize: theme.fontSize.big,
+    fontSize: theme.fontSize.l,
   },
 }));

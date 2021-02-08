@@ -27,8 +27,8 @@ const theme = {
   text: '#2b2b2b',
 };
 
-type Theme = typeof theme;
-const StyleSheet = new Sugar<Theme>(theme);
+export type Theme = typeof theme;
+export const { StyleSheet } = new Sugar.init<Theme>(theme);
 
 export default StyleSheet;
 ```

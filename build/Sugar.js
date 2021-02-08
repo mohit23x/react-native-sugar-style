@@ -17,7 +17,7 @@ class Sugar {
         this.setStyleAttributePreprocessor =
             react_native_1.StyleSheet.setStyleAttributePreprocessor;
     }
-    buildTheme(themeObj) {
+    build(themeObj) {
         this.theme = { ...this.theme, ...themeObj };
         this.builded = true;
         this._calcSheets();

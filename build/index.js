@@ -7,12 +7,12 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Sugar = void 0;
-__exportStar(require("./lib/constant"), exports);
-__exportStar(require("./lib/Provider"), exports);
-const Sugar_1 = require("./lib/Sugar");
-exports.Sugar = Sugar_1.default;
-exports.default = Sugar_1.default;
+__exportStar(require("./Constant"), exports);
+__exportStar(require("./Provider"), exports);
+const Main_1 = require("./Main");
+exports.Sugar = Main_1.default;
+exports.default = new Main_1.default();

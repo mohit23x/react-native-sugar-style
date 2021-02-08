@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import type { S, Fn } from './type';
+import { S, Fn, buildEventType } from './type';
 import Sheet from './Sheet';
 
 const BUILD_EVENT = 'build' as const;
@@ -115,7 +115,7 @@ export default class Sugar<T> {
       StyleSheet.setStyleAttributePreprocessor;
   }
 
-  buildTheme(themeObj: T): void {
+  build(themeObj: T): void {
     this.theme = { ...this.theme, ...themeObj } as T;
     this.builded = true;
     this._calcSheets();
@@ -139,13 +139,13 @@ export default class Sugar<T> {
   }
 
   // extra methods
-  _callListeners(event: typeof BUILD_EVENT): void {
+  _callListeners(event: buildEventType): void {
     if (Array.isArray(this.listeners[event])) {
       this.listeners[event].forEach((listener:any) => listener());
     }
   }
 
-  subscribe(event: typeof BUILD_EVENT, listener: () => any): void {
+  subscribe(event: buildEventType, listener: () => any): void {
     this._assertSubscriptionParams(event, listener);
     this.listeners[BUILD_EVENT] = this.listeners[BUILD_EVENT] || [];
     this.listeners[BUILD_EVENT].push(listener);
@@ -154,7 +154,7 @@ export default class Sugar<T> {
     }
   }
 
-  _assertSubscriptionParams(event:typeof BUILD_EVENT, listener:any) {
+  _assertSubscriptionParams(event:buildEventType, listener:any) {
     if (event !== BUILD_EVENT) {
       throw new Error(`Only '${BUILD_EVENT}' event is currently supported.`);
     }
