@@ -18,7 +18,7 @@ npm i react-native-sugar-style
 
 ### Usage
 
-STEP 1: _style.tsx_
+STEP 1: **style.tsx**
 
 Define configurations for your theme see [this file](https://github.com/mohit23x/react-native-sugar-style/blob/main/example/style/index.tsx) for a more verbose example
 
@@ -37,6 +37,8 @@ export const { StyleSheet, ThemeProvider, useTheme } = Sugar.init<Theme>(theme);
 export default StyleSheet;
 ```
 
+<br />
+
 STEP 2: **App.tsx** (optional)
 
 Wrap with ThemeProvider, if you are using a single theme then this step is not needed skip to STEP 3
@@ -52,6 +54,8 @@ const App = () => (
   </ThemeProvider>
 );
 ```
+
+<br />
 
 STEP 3: **component.tsx**
 
@@ -86,6 +90,8 @@ const styles = StyleSheet.create((theme) => ({
 ```
 
 > **NOTE**: if you have a single theme then `useTheme()` hook can be avoided, also if you add `useTheme()` in you navigation screen parent component, then you can avoid using it in child components\*
+
+<br />
 
 STEP 4: **anotherComponent.tsx** (optional)
 
