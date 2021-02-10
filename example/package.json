@@ -17,7 +17,7 @@
     "react-native-gesture-handler": "~1.8.0",
     "react-native-reanimated": "~1.13.0",
     "react-native-screens": "~2.15.0",
-    "react-native-sugar-style": "^0.0.8",
+    "react-native-sugar-style": "./../",
     "react-native-unimodules": "~0.12.0",
     "react-native-web": "~0.13.12"
   },

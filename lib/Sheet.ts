@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import type { S, Fn } from './type';
+import type {  Fn, NamedStyles } from './type';
 
-export default class Sheet<T> {
+export default class Sheet<T, S extends NamedStyles<S> | NamedStyles<any>> {
   public result: S;
   public source: Fn<T, S>;
   public nativeSheet: S = {} as S;
@@ -25,27 +25,30 @@ export default class Sheet<T> {
     return this.result;
   }
 
-  clearResult():void {
+  clearResult(): void {
+    // @ts-ignore
     Object.keys(this.result).forEach((key: string) => delete this.result[key]);
   }
 
   calcStyles():void {
-    // let restyle = typeof this.source === "function" ? this.source(this.globalVars) : this.source;
     if (this.globalVars) {
       const restyle = this.source(this.globalVars);
 
       Object.keys(restyle).forEach((key) => {
+        // @ts-ignore
         const styles = restyle[key];
         if (styles && typeof styles === 'object') {
           this.calcStyle(key, styles);
         } else {
+          // @ts-ignore
           this.result[key] = styles;
         }
       });
     }
   }
 
-  calcStyle(key:string, styleProps:any):void {
+  calcStyle(key: string, styleProps: any): void {
+    // @ts-ignore
       this.nativeSheet[key] = styleProps;
   }
 

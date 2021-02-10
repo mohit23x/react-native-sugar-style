@@ -6800,10 +6800,11 @@ react-native-screens@~2.15.0:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.15.2.tgz#a449700e895b462937211ec72ed6f09652758f06"
   integrity sha512-CagNf2APXkVoRlF3Mugr264FbKbrBg9eXUkqhIPVeZB8EsdS8XPrnt99yj/pzmT+yJMBY0dGrjXT8+68WYh6YQ==
 
-react-native-sugar-style@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/react-native-sugar-style/-/react-native-sugar-style-0.0.8.tgz#a4558c99a350df052ef3007911ea7d45a54495a3"
-  integrity sha512-wgHJnG/wPFz12uVOFE3sT/G8s8x9s0UB4pv27moeSImZSuAv3seJzLf6L8vZDeLbpMZnAskvqBdg1Q9ijx6bUg==
+react-native-sugar-style@./../:
+  version "0.0.9"
+
+"react-native-sugar-style@file:./..":
+  version "0.0.9"
 
 react-native-unimodules@~0.12.0:
   version "0.12.0"

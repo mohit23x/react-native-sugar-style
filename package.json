@@ -1,6 +1,6 @@
 {
   "name": "react-native-sugar-style",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "React Native Stylesheet alternative with theme support",
   "author": "mohit23x",
   "license": "MIT",
@@ -16,7 +16,7 @@
   "keywords": [
     "react native",
     "theme",
-    "stylesheet",
+    "StyleSheet",
     "sugar"
   ],
   "devDependencies": {
