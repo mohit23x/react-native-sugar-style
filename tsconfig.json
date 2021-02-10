@@ -9,5 +9,5 @@
     "declaration": true,
     "outDir": "./build",
   },
-  "exclude": ["example", "node_modules"]
+  "exclude": ["./example/**/*", "./node_modules/**/*", "./build/**/*"]
 }

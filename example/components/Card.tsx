@@ -17,8 +17,7 @@ const styles = StyleSheet.create(theme => ({
     margin: theme.spacing.m,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: theme.borderRadius.m,
-    marginTop: theme.constant.statusBarHeight
+    borderRadius: theme.borderRadius.m
   },
   text: {
     color: theme.text,

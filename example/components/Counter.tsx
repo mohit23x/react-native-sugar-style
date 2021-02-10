@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import { Text, Pressable } from "react-native";
 import { StyleSheet, useTheme } from "../style";
 
 export default function Counter() {
-  const [count, setCount] = useState(1);
   useTheme();
+  const [count, setCount] = useState(1);
 
   return (
     <Pressable style={styles.pressable} onPress={() => setCount(c => c + 1)}>

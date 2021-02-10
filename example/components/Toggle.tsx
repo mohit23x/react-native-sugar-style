@@ -33,6 +33,6 @@ const styles = StyleSheet.create(theme => ({
   },
   text: {
     color: theme.text,
-    fontSize: theme.fontSize.medium
+    fontSize: theme.fontSize.m
   }
 }));
