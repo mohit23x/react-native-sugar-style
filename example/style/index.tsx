@@ -1,4 +1,4 @@
-import Sugar, { constants } from "react-native-sugar-style";
+import { Sugar, constants } from "react-native-sugar-style";
 
 const commonTheme = {
   ...constants,
@@ -45,6 +45,6 @@ export const {
   ThemeContext,
   useTheme,
   withTheme
-} = Sugar.init<Theme>(lightTheme);
+} = Sugar<Theme>(lightTheme);
 
 export default StyleSheet;

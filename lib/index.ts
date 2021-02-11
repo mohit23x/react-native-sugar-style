@@ -2,4 +2,4 @@ export * from './Constant';
 export * from './Provider';
 import Main from './Main';
 export { Main as Sugar };
-export default new Main();
+export default Main;
