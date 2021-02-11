@@ -32,7 +32,7 @@ const theme = {
 };
 
 export type Theme = typeof theme;
-export const { StyleSheet, ThemeProvider, useTheme } = Sugar.init<Theme>(theme);
+export const { StyleSheet, ThemeProvider, useTheme } = Sugar<Theme>(theme);
 
 export default StyleSheet;
 ```

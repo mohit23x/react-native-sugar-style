@@ -15,4 +15,4 @@ __exportStar(require("./Constant"), exports);
 __exportStar(require("./Provider"), exports);
 const Main_1 = require("./Main");
 exports.Sugar = Main_1.default;
-exports.default = new Main_1.default();
+exports.default = Main_1.default;
