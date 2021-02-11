@@ -100,7 +100,7 @@ To change the theme you can call build method and it will swap the theme
 ```javascript
 import React from 'react';
 import { View, Button } from 'react-native';
-import { StyleSheet } from './style';
+import { StyleSheet, lightTheme, darkTheme } from './style';
 
 const Component = () => {
   const light = () => StyleSheet.build(lightTheme);
