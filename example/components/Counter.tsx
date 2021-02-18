@@ -21,7 +21,7 @@ export default function Counter() {
   );
 }
 
-const styles = StyleSheet.create((theme, constants) => ({
+const styles = StyleSheet.create(theme => ({
   pressable: {
     alignItems: "center",
     justifyContent: "center",

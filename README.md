@@ -1,12 +1,23 @@
-# React Native Sugar Style
+<h1 align="left">
 
-Theme based alternative for React Native StyleSheet. (🧪 Experimental)
+    React Native Sugar Style
+
+</h1>
+🧪Experimental
+
+- Theme based alternative for React Native StyleSheet
+
+- Support responsive values as array
+
+- works on android/ios/web (expo/react-native)
 
 | BEFORE                                | AFTER                              |
 | ------------------------------------- | ---------------------------------- |
 | ![Before](assets/before.png 'Before') | ![After](assets/after.png 'After') |
 
 ### Install
+
+https://www.npmjs.com/package/react-native-sugar-style
 
 ```
 yarn add react-native-sugar-style
@@ -123,7 +134,7 @@ const Component = () => {
 ### Demo
 
 Scan and run with expo go app, run the [example project](https://github.com/mohit23x/react-native-sugar-style/tree/main/example) for a more detailed example.
-https://expo.io/@mohit23x/projects/react-native-sugar-style
+https://expo.io/@mohit23x/projects/react-native-sugar-style or try the [react native web version](https://sugar-style.netlify.app/)
 
 ![Scan QR with expo app](assets/qr.png 'Scan QR')
 
@@ -157,4 +168,3 @@ Special thanks to the Authors of the amazing open source libraries
 ### Caveats
 
 - May introduce performance issues (not tested)
-- Dimension values are not dynamic (device height/width don't change based on orientation)
