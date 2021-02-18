@@ -3,7 +3,7 @@
     React Native Sugar Style
 
 </h1>
-🧪Experimental
+https://www.npmjs.com/package/react-native-sugar-style (🧪 Experimental)
 
 - Theme based alternative for React Native StyleSheet
 
@@ -16,8 +16,6 @@
 | ![Before](assets/before.png 'Before') | ![After](assets/after.png 'After') |
 
 ### Install
-
-https://www.npmjs.com/package/react-native-sugar-style
 
 ```
 yarn add react-native-sugar-style
