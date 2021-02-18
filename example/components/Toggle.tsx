@@ -6,7 +6,8 @@ export default function Toggle() {
   const isLight = StyleSheet.theme.name === "light";
 
   const onPress = () => {
-    StyleSheet.build(isLight ? darkTheme : lightTheme);
+    const newTheme = isLight ? darkTheme : lightTheme;
+    StyleSheet.build(newTheme);
   };
 
   return (
@@ -24,10 +25,12 @@ const styles = StyleSheet.create(theme => ({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginVertical: theme.spacing.m
   },
   button: {
-    padding: theme.spacing.l,
+    padding: theme.spacing.m,
+    marginVertical: theme.spacing.s,
     backgroundColor: theme.buttonPrimary,
     borderRadius: theme.borderRadius.s
   },

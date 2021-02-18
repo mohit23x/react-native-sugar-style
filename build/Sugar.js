@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_native_1 = require("react-native");
 const Sheet_1 = require("./Sheet");
+const Constant_1 = require("./Constant");
 const BUILD_EVENT = 'build';
 class Sugar {
     constructor(newTheme) {
@@ -9,35 +10,55 @@ class Sugar {
         this.sheets = [];
         this.listeners = [];
         this.theme = newTheme;
-        // proxy to original
         this.hairLineWidth = react_native_1.StyleSheet.hairlineWidth;
         this.absoluteFill = react_native_1.StyleSheet.absoluteFill;
         this.absoluteFillObject = react_native_1.StyleSheet.absoluteFillObject;
         this.flatten = react_native_1.StyleSheet.flatten;
         this.setStyleAttributePreprocessor =
             react_native_1.StyleSheet.setStyleAttributePreprocessor;
+        this.constants = Constant_1.constants;
+        this.activeIndex = 0;
+        this._calculateActiveIndex();
+    }
+    _refresh() {
+        this.builded = true;
+        this._calculateActiveIndex();
+        this._calcSheets();
+        this._callListeners(BUILD_EVENT);
     }
     build(themeObj) {
         this.theme = { ...this.theme, ...themeObj };
-        this.builded = true;
-        this._calcSheets();
-        this._callListeners(BUILD_EVENT);
+        this._refresh();
+    }
+    configure(newConstants) {
+        this.constants = { ...this.constants, ...newConstants };
+        this._refresh();
     }
     create(objFn) {
         if (typeof objFn === 'function') {
             const sheet = new Sheet_1.default(objFn);
             this.sheets.push(sheet);
             if (this.builded) {
-                sheet.calc(this.theme);
+                sheet.calc(this.theme, this.constants, this.activeIndex);
             }
             return sheet.getResult();
         }
         return objFn;
     }
-    _calcSheets() {
-        this.sheets.forEach((sheet) => sheet.calc(this.theme));
+    _calculateActiveIndex() {
+        const breakPointValues = Object.values(this.constants.breakPoints);
+        const currentWidth = this.constants.width;
+        let activeIndex = 0;
+        breakPointValues.forEach((value) => {
+            if (currentWidth >= value) {
+                activeIndex++;
+            }
+        });
+        this.activeIndex = activeIndex;
     }
-    // extra methods
+    _calcSheets() {
+        this.sheets.forEach((sheet) => sheet.calc(this.theme, this.constants, this.activeIndex));
+    }
     _callListeners(event) {
         if (Array.isArray(this.listeners[event])) {
             this.listeners[event].forEach((listener) => listener());

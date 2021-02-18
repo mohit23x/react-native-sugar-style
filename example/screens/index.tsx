@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { StyleSheet, useTheme } from "../style";
 
 import Card from "../components/Card";
@@ -11,17 +11,19 @@ export default function Screen() {
 
   return (
     <View style={styles.container}>
-      <Card />
-      <Counter />
-      <Toggle />
+      <ScrollView>
+        <Card />
+        <Counter />
+        <Toggle />
+      </ScrollView>
     </View>
   );
 }
 
-const styles = StyleSheet.create(theme => ({
+const styles = StyleSheet.create((theme, constants) => ({
   container: {
     flex: 1,
     backgroundColor: theme.background,
-    marginTop: theme.constant.statusBarHeight
+    paddingTop: constants.statusBarHeight
   }
 }));

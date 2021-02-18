@@ -5,13 +5,11 @@ class Sheet {
     constructor(sourceFn) {
         this.nativeSheet = {};
         this.source = sourceFn;
-        this.globalVars = null;
         this.result = {};
     }
-    calc(globalVars) {
-        this.globalVars = globalVars;
+    calc(globalVars, constants, activeIndex) {
         this.clearResult();
-        this.calcStyles();
+        this.calcStyles(globalVars, constants, activeIndex);
         this.calcNative();
         return this.getResult();
     }
@@ -22,19 +20,21 @@ class Sheet {
         // @ts-ignore
         Object.keys(this.result).forEach((key) => delete this.result[key]);
     }
-    calcStyles() {
-        if (this.globalVars) {
-            const restyle = this.source(this.globalVars);
+    calcStyles(globalVars, constants, activeIndex) {
+        if (globalVars) {
+            const restyle = this.source(globalVars, constants);
             Object.keys(restyle).forEach((key) => {
                 // @ts-ignore
                 const styles = restyle[key];
-                if (styles && typeof styles === 'object') {
-                    this.calcStyle(key, styles);
-                }
-                else {
-                    // @ts-ignore
-                    this.result[key] = styles;
-                }
+                Object.keys(styles).forEach((styleKey) => {
+                    const styleValue = styles[styleKey];
+                    if (styleValue && Array.isArray(styleValue)) {
+                        const selectedValue = styleValue[activeIndex] || styleValue[styleValue.length - 1];
+                        styles[styleKey] = selectedValue;
+                    }
+                });
+                // @ts-ignore
+                this.result[key] = styles;
             });
         }
     }
@@ -43,7 +43,7 @@ class Sheet {
         this.nativeSheet[key] = styleProps;
     }
     calcNative() {
-        if (Object.keys(this.nativeSheet).length) {
+        if (Object.keys(this.result).length) {
             const rnStyleSheet = react_native_1.StyleSheet.create(this.nativeSheet);
             Object.assign(this.result, rnStyleSheet);
         }

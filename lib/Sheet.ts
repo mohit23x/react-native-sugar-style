@@ -1,27 +1,28 @@
 import { StyleSheet } from 'react-native';
-import type {  Fn, NamedStyles } from './type';
+import type { ConstantsType, Fn, NamedStyles, StyleSheetType } from './type';
 
-export default class Sheet<T, S extends NamedStyles<S> | NamedStyles<any>> {
-  public result: S;
+export default class Sheet<
+  T,
+  S extends NamedStyles<S> | NamedStyles<any>,
+  O extends StyleSheetType<O> | StyleSheetType<any>
+  > {
+  public result: O;
   public source: Fn<T, S>;
-  public nativeSheet: S = {} as S;
-  public globalVars: T | null;
+  public nativeSheet: O = {} as O;
 
   constructor(sourceFn: Fn<T, S>) {
     this.source = sourceFn;
-    this.globalVars = null;
-    this.result = {} as S;
+    this.result = {} as O;
   }
 
-  calc(globalVars: T): S {
-    this.globalVars = globalVars;
+  calc(globalVars: T, constants: ConstantsType, activeIndex: number): O {
     this.clearResult();
-    this.calcStyles();
+    this.calcStyles(globalVars, constants, activeIndex);
     this.calcNative();
     return this.getResult();
   }
 
-  getResult(): S {
+  getResult(): O {
     return this.result;
   }
 
@@ -30,30 +31,37 @@ export default class Sheet<T, S extends NamedStyles<S> | NamedStyles<any>> {
     Object.keys(this.result).forEach((key: string) => delete this.result[key]);
   }
 
-  calcStyles():void {
-    if (this.globalVars) {
-      const restyle = this.source(this.globalVars);
-
+  calcStyles(
+    globalVars: T,
+    constants: ConstantsType,
+    activeIndex: number
+  ): void {
+    if (globalVars) {
+      const restyle = this.source(globalVars, constants);
       Object.keys(restyle).forEach((key) => {
         // @ts-ignore
         const styles = restyle[key];
-        if (styles && typeof styles === 'object') {
-          this.calcStyle(key, styles);
-        } else {
-          // @ts-ignore
-          this.result[key] = styles;
-        }
+        Object.keys(styles).forEach((styleKey) => {
+          const styleValue = styles[styleKey];
+          if (styleValue && Array.isArray(styleValue)) {
+            const selectedValue =
+              styleValue[activeIndex] || styleValue[styleValue.length - 1];
+            styles[styleKey] = selectedValue;
+          }
+        });
+        // @ts-ignore
+        this.result[key] = styles;
       });
     }
   }
 
   calcStyle(key: string, styleProps: any): void {
     // @ts-ignore
-      this.nativeSheet[key] = styleProps;
+    this.nativeSheet[key] = styleProps;
   }
 
-  calcNative():void {
-    if (Object.keys(this.nativeSheet).length) {
+  calcNative(): void {
+    if (Object.keys(this.result).length) {
       const rnStyleSheet = StyleSheet.create(this.nativeSheet);
       Object.assign(this.result, rnStyleSheet);
     }
