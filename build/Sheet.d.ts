@@ -1,5 +1,5 @@
-import type { ConstantsType, Fn, NamedStyles, StyleSheetType } from './type';
-export default class Sheet<T, S extends NamedStyles<S> | NamedStyles<any>, O extends StyleSheetType<O> | StyleSheetType<any>> {
+import type { ConstantsType, Fn, NamedStyles } from './type';
+export default class Sheet<T, S extends NamedStyles<S> | NamedStyles<any>, O = S> {
     result: O;
     source: Fn<T, S>;
     nativeSheet: O;

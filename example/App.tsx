@@ -1,7 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "./style";
 import Screen from "./screens";
-import { StatusBar } from "react-native";
 
 export default function App() {
   return (

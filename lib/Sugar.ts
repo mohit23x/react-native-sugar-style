@@ -145,10 +145,7 @@ export default class Sugar<T> {
     this._refresh();
   }
 
-  create<
-    P extends NamedStyles<P> | NamedStyles<any>,
-    O extends StyleSheetType<P> | StyleSheetType<any>
-  >(objFn: Fn<T, P>): P {
+  create<P extends NamedStyles<P> | NamedStyles<any>>(objFn: Fn<T, P>): P {
     if (typeof objFn === 'function') {
       const sheet = new Sheet(objFn);
       this.sheets.push(sheet);
