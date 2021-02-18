@@ -6,15 +6,22 @@ export default function Card() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>🤘Hello World!</Text>
+      {StyleSheet.constants.os.web ? (
+        <Text style={styles.help}>Try resizing the browser width.</Text>
+      ) : (
+        <Text style={styles.help}>
+          Try changing the orientation of the device.
+        </Text>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create(theme => ({
   container: {
-    height: 250,
+    minHeight: 200,
     backgroundColor: theme.surface,
-    margin: theme.spacing.m,
+    margin: theme.spacing.l,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: theme.borderRadius.m
@@ -23,5 +30,10 @@ const styles = StyleSheet.create(theme => ({
     color: theme.text,
     fontWeight: "700",
     fontSize: theme.fontSize.l
+  },
+  help: {
+    color: theme.text,
+    marginTop: theme.spacing.s,
+    opacity: 0.7
   }
 }));

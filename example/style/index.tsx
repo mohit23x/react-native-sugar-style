@@ -1,8 +1,8 @@
-import { Sugar, constants } from "react-native-sugar-style";
+import { Sugar } from "react-native-sugar-style";
 
 const commonTheme = {
-  ...constants,
   spacing: {
+    xs: 5,
     s: 10,
     m: 20,
     l: 30
@@ -16,8 +16,11 @@ const commonTheme = {
     m: 16,
     l: 24,
     xl: 32
-  }
-  // add any custom value
+  },
+  orangeOff: "#f2b40059",
+  orange: "#f0932b",
+  greenOff: "#badc5859",
+  green: "#6ab04c"
 };
 
 export const lightTheme = {
@@ -26,7 +29,7 @@ export const lightTheme = {
   background: "#fbfbfb",
   surface: "#c0c0c0",
   text: "#121212",
-  buttonPrimary: "#f2b400"
+  buttonPrimary: "#7ed6df"
 };
 
 export const darkTheme = {
@@ -35,7 +38,7 @@ export const darkTheme = {
   background: "#000000",
   surface: "#2b2b2b",
   text: "#f0f0f0",
-  buttonPrimary: "#3700b3"
+  buttonPrimary: "#4834d4"
 };
 
 export type Theme = typeof lightTheme;

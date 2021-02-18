@@ -1,6 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { Fn, buildEventType, NamedStyles } from './type';
+import {
+  Fn,
+  buildEventType,
+  NamedStyles,
+  ConstantsType,
+  StyleSheetType,
+} from './type';
 import Sheet from './Sheet';
+import { constants } from './Constant';
 
 const BUILD_EVENT = 'build' as const;
 
@@ -101,45 +108,76 @@ export default class Sugar<T> {
    * the alternative use.
    */
   public flatten: typeof StyleSheet.flatten;
+  public constants: ConstantsType;
+  public activeIndex: number;
 
   constructor(newTheme: T) {
     this.builded = true;
     this.sheets = [];
     this.listeners = [];
     this.theme = newTheme;
-    // proxy to original
+
     this.hairLineWidth = StyleSheet.hairlineWidth;
     this.absoluteFill = StyleSheet.absoluteFill;
     this.absoluteFillObject = StyleSheet.absoluteFillObject;
     this.flatten = StyleSheet.flatten;
     this.setStyleAttributePreprocessor =
       StyleSheet.setStyleAttributePreprocessor;
+    this.constants = constants;
+    this.activeIndex = 0;
+    this._calculateActiveIndex();
   }
 
-  build(themeObj: T): void {
-    this.theme = { ...this.theme, ...themeObj } as T;
+  _refresh() {
     this.builded = true;
+    this._calculateActiveIndex();
     this._calcSheets();
     this._callListeners(BUILD_EVENT);
   }
 
-  create<P extends NamedStyles<P> | NamedStyles<any>>(objFn: Fn<T, P> | P): P {
+  build(themeObj: T): void {
+    this.theme = { ...this.theme, ...themeObj } as T;
+    this._refresh();
+  }
+
+  configure(newConstants: Partial<ConstantsType>): void {
+    this.constants = { ...this.constants, ...newConstants } as ConstantsType;
+    this._refresh();
+  }
+
+  create<
+    P extends NamedStyles<P> | NamedStyles<any>,
+    O extends StyleSheetType<P> | StyleSheetType<any>
+  >(objFn: Fn<T, P>): P {
     if (typeof objFn === 'function') {
       const sheet = new Sheet(objFn);
       this.sheets.push(sheet);
       if (this.builded) {
-        sheet.calc(this.theme);
+        sheet.calc(this.theme, this.constants, this.activeIndex);
       }
-      return sheet.getResult();
+      return sheet.getResult() as P;
     }
-    return objFn;
+    return objFn as P;
+  }
+
+  _calculateActiveIndex(): void {
+    const breakPointValues = Object.values(this.constants.breakPoints);
+    const currentWidth = this.constants.width;
+    let activeIndex = 0;
+    breakPointValues.forEach((value: number) => {
+      if (currentWidth >= value) {
+        activeIndex++;
+      }
+    });
+    this.activeIndex = activeIndex;
   }
 
   _calcSheets(): void {
-    this.sheets.forEach((sheet) => sheet.calc(this.theme));
+    this.sheets.forEach((sheet) =>
+      sheet.calc(this.theme, this.constants, this.activeIndex)
+    );
   }
 
-  // extra methods
   _callListeners(event: buildEventType): void {
     if (Array.isArray(this.listeners[event])) {
       this.listeners[event].forEach((listener: any) => listener());

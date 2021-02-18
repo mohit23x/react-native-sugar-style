@@ -20,15 +20,19 @@ npm i react-native-sugar-style
 
 STEP 1: **style.tsx**
 
-Define configurations for your theme see [this file](https://github.com/mohit23x/react-native-sugar-style/blob/main/example/style/index.tsx) for a more verbose example
+Define configurations for your theme, for more verbose example see [this file](https://github.com/mohit23x/react-native-sugar-style/blob/main/example/style/index.tsx).
 
 ```typescript
-import { Sugar, constants } from 'react-native-sugar-style';
+import Sugar from 'react-native-sugar-style';
 
-const theme = {
-  ...constants,
+const dark = {
+  background: '#2b2b2b',
+  text: '#ffffff',
+};
+
+const light = {
   background: '#fbfbfb',
-  text: '#2b2b2b',
+  text: '#000000',
 };
 
 export type Theme = typeof theme;
@@ -39,9 +43,9 @@ export default StyleSheet;
 
 <br />
 
-STEP 2: **App.tsx** (optional)
+STEP 2: **App.tsx**
 
-Wrap with ThemeProvider, if you are using a single theme then this step is not needed skip to STEP 3
+Wrap with ThemeProvider
 
 ```javascript
 import React from 'react';
@@ -59,7 +63,7 @@ const App = () => (
 
 STEP 3: **component.tsx**
 
-Use StyleSheet as you do normally in react native component
+Use StyleSheet as you do normally do in components
 
 ```javascript
 import React from 'react';
@@ -76,40 +80,41 @@ const Component = () => {
   );
 };
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create((theme, constants) => ({
   container: {
-    height: theme.constant.height,
-    width: theme.constant.width,
+    height: constants.height,
+    width: constants.width,
     backgroundColor: theme.background,
+    flexDirection: ['column', 'row'],
   },
   text: {
-    fontSize: theme.font.size,
+    fontSize: theme.size.m,
     color: theme.text,
   },
 }));
 ```
 
-> **NOTE**: if you have a single theme then `useTheme()` hook can be avoided, also if you add `useTheme()` in you navigation screen parent component, then you can avoid using it in child components\*
+> **NOTE**: if you add `useTheme()` in the navigation screen (parent component), then you can avoid using it in child components\*
 
 <br />
 
-STEP 4: **anotherComponent.tsx** (optional)
+STEP 4: **anotherComponent.tsx**
 
 To change the theme you can call build method and it will swap the theme
 
 ```javascript
 import React from 'react';
 import { View, Button } from 'react-native';
-import { StyleSheet, lightTheme, darkTheme } from './style';
+import { StyleSheet, light, dark } from './style';
 
 const Component = () => {
-  const light = () => StyleSheet.build(lightTheme);
-  const dark = () => StyleSheet.build(darkTheme);
+  const onLight = () => StyleSheet.build(light);
+  const onDark = () => StyleSheet.build(dark);
 
   return (
     <View>
-      <Button onPress={light} title="light" />
-      <Button onPress={dark} title="dark" />
+      <Button onPress={onLight} title="light theme" />
+      <Button onPress={onDark} title="dark theme" />
     </View>
   );
 };

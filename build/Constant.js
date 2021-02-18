@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constants = void 0;
+exports.constants = exports.calculateVisibleHeight = exports.calculateNavBarHeight = void 0;
 const react_native_1 = require("react-native");
 const { height, width } = react_native_1.Dimensions.get('window');
 /* =========== */
@@ -20,26 +20,37 @@ const statusBarHeight = react_native_1.Platform.select({
 });
 /* ====== x ====== */
 const { height: screenHeight, width: screenWidth } = react_native_1.Dimensions.get('screen');
-const navBarHeight = screenHeight - statusBarHeight - height;
+exports.calculateNavBarHeight = ({ screenHeight, height, }) => {
+    return screenHeight - statusBarHeight - height;
+};
+const navBarHeight = exports.calculateNavBarHeight({
+    screenHeight,
+    height,
+});
 const isNavBarVisible = navBarHeight > 0;
-const visibleHeight = height - navBarHeight;
+exports.calculateVisibleHeight = ({ height, navBarHeight, }) => height - navBarHeight;
+const visibleHeight = exports.calculateVisibleHeight({ height, navBarHeight });
 const os = {
     android: react_native_1.Platform.OS === 'android',
     ios: react_native_1.Platform.OS === 'ios',
     web: react_native_1.Platform.OS === 'web',
     windows: react_native_1.Platform.OS === 'windows',
 };
+const breakPoints = {
+    mobile: 480,
+    tablet: 767,
+    desktop: 1280,
+};
 exports.constants = {
-    constant: {
-        height,
-        width,
-        screenHeight,
-        screenWidth,
-        navBarHeight,
-        isNavBarVisible,
-        visibleHeight,
-        isIPhoneX,
-        os,
-        statusBarHeight,
-    },
+    height,
+    width,
+    screenHeight,
+    screenWidth,
+    statusBarHeight,
+    navBarHeight,
+    isNavBarVisible,
+    visibleHeight,
+    isIPhoneX,
+    os,
+    breakPoints,
 };

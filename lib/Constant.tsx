@@ -22,9 +22,33 @@ const statusBarHeight = Platform.select({
 /* ====== x ====== */
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get('screen');
-const navBarHeight = screenHeight - statusBarHeight - height;
+
+export const calculateNavBarHeight = ({
+  screenHeight,
+  height,
+}: {
+  screenHeight: number;
+  height: number;
+}) => {
+  return screenHeight - statusBarHeight - height;
+};
+
+const navBarHeight = calculateNavBarHeight({
+  screenHeight,
+  height,
+});
+
 const isNavBarVisible = navBarHeight > 0;
-const visibleHeight = height - navBarHeight;
+
+export const calculateVisibleHeight = ({
+  height,
+  navBarHeight,
+}: {
+  height: number;
+  navBarHeight: number;
+}) => height - navBarHeight;
+
+const visibleHeight = calculateVisibleHeight({ height, navBarHeight });
 
 const os = {
   android: Platform.OS === 'android',
@@ -33,17 +57,22 @@ const os = {
   windows: Platform.OS === 'windows',
 } as const;
 
+const breakPoints = {
+  mobile: 480,
+  tablet: 767,
+  desktop: 1280,
+};
+
 export const constants = {
-  constant: {
-    height,
-    width,
-    screenHeight,
-    screenWidth,
-    navBarHeight,
-    isNavBarVisible,
-    visibleHeight,
-    isIPhoneX,
-    os,
-    statusBarHeight,
-  },
+  height,
+  width,
+  screenHeight,
+  screenWidth,
+  statusBarHeight,
+  navBarHeight,
+  isNavBarVisible,
+  visibleHeight,
+  isIPhoneX,
+  os,
+  breakPoints,
 } as const;
