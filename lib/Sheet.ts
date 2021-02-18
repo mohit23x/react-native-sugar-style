@@ -4,7 +4,7 @@ import type { ConstantsType, Fn, NamedStyles, StyleSheetType } from './type';
 export default class Sheet<
   T,
   S extends NamedStyles<S> | NamedStyles<any>,
-  O extends StyleSheetType<O> | StyleSheetType<any>
+  O = S
   > {
   public result: O;
   public source: Fn<T, S>;
@@ -44,9 +44,14 @@ export default class Sheet<
         Object.keys(styles).forEach((styleKey) => {
           const styleValue = styles[styleKey];
           if (styleValue && Array.isArray(styleValue)) {
-            const selectedValue =
-              styleValue[activeIndex] || styleValue[styleValue.length - 1];
-            styles[styleKey] = selectedValue;
+            // length is checked to allow undefined to set as styleValue
+            if (activeIndex >= styleValue.length) {
+              const selectedValue = styleValue[styleValue.length - 1];
+              styles[styleKey] = selectedValue;
+            } else {
+              const selectedValue = styleValue[activeIndex];
+              styles[styleKey] = selectedValue;
+            }
           }
         });
         // @ts-ignore

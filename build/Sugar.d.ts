@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Fn, buildEventType, NamedStyles, ConstantsType, StyleSheetType } from './type';
+import { Fn, buildEventType, NamedStyles, ConstantsType } from './type';
 import Sheet from './Sheet';
 export default class Sugar<T> {
     builded: boolean;
@@ -99,7 +99,7 @@ export default class Sugar<T> {
     _refresh(): void;
     build(themeObj: T): void;
     configure(newConstants: Partial<ConstantsType>): void;
-    create<P extends NamedStyles<P> | NamedStyles<any>, O extends StyleSheetType<P> | StyleSheetType<any>>(objFn: Fn<T, P>): P;
+    create<P extends NamedStyles<P> | NamedStyles<any>>(objFn: Fn<T, P>): P;
     _calculateActiveIndex(): void;
     _calcSheets(): void;
     _callListeners(event: buildEventType): void;

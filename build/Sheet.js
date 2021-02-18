@@ -29,7 +29,7 @@ class Sheet {
                 Object.keys(styles).forEach((styleKey) => {
                     const styleValue = styles[styleKey];
                     if (styleValue && Array.isArray(styleValue)) {
-                        const selectedValue = styleValue[activeIndex] || styleValue[styleValue.length - 1];
+                        const selectedValue = styleValue[activeIndex];
                         styles[styleKey] = selectedValue;
                     }
                 });
