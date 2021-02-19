@@ -1,13 +1,10 @@
-import type { ConstantsType, Fn, NamedStyles } from './type';
-export default class Sheet<T, S extends NamedStyles<S> | NamedStyles<any>, O = S> {
-    result: O;
-    source: Fn<T, S>;
-    nativeSheet: O;
-    constructor(sourceFn: Fn<T, S>);
-    calc(globalVars: T, constants: ConstantsType, activeIndex: number): O;
-    getResult(): O;
+import type { ConstantsType, Fn, NamedStyles, StyleSheetType } from './type';
+export default class Sheet<T, P extends NamedStyles<P> | NamedStyles<any>> {
+    result: StyleSheetType<P>;
+    source: Fn<T, P>;
+    constructor(sourceFn: Fn<T, P>);
+    calc(globalVars: T, constants: ConstantsType, activeIndex: number): StyleSheetType<P>;
+    getResult(): StyleSheetType<P>;
     clearResult(): void;
     calcStyles(globalVars: T, constants: ConstantsType, activeIndex: number): void;
-    calcStyle(key: string, styleProps: any): void;
-    calcNative(): void;
 }

@@ -4,7 +4,6 @@ import Sugar from './Sugar';
 
 export type ConstantsType = typeof constants;
 
-
 export type SugarViewStyle = {
   [P in keyof ViewStyle]: ViewStyle[P] | Array<ViewStyle[P]>;
 };
@@ -22,11 +21,21 @@ export type NamedStyles<T> = {
 
 export type S = NamedStyles<any>;
 
-export type Fn<T, P> = (theme: T, constants: ConstantsType) => P extends NamedStyles<P> ? NamedStyles<P> : P;
+export type Fn<T, P> = (
+  theme: T,
+  constants: ConstantsType
+) => P extends NamedStyles<P> ? NamedStyles<P> : P;
 
-export type StyleSheetType<T> = {
-  [P in keyof T]: ViewStyle | TextStyle | ImageStyle;
+export type StyleSheetType<P> = {
+  [K in keyof P]: {
+    [J in keyof P[K]]: P[K][J] extends Array<any>
+      ? J extends 'transform' | 'transformMatrix'
+        ? P[K][J]
+        : P[K][J][number]
+      : P[K][J];
+  };
 };
+
 export type buildEventType = 'build';
 
 export type ThemeProp<T> = {
