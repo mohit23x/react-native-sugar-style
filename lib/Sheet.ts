@@ -1,28 +1,23 @@
-import { StyleSheet } from 'react-native';
 import type { ConstantsType, Fn, NamedStyles, StyleSheetType } from './type';
 
 export default class Sheet<
   T,
-  S extends NamedStyles<S> | NamedStyles<any>,
-  O = S
-  > {
-  public result: O;
-  public source: Fn<T, S>;
-  public nativeSheet: O = {} as O;
+  P extends NamedStyles<P> | NamedStyles<any>> {
+  public result: StyleSheetType<P>;
+  public source: Fn<T, P>;
 
-  constructor(sourceFn: Fn<T, S>) {
+  constructor(sourceFn: Fn<T, P>) {
     this.source = sourceFn;
-    this.result = {} as O;
+    this.result = {} as StyleSheetType<P>;
   }
 
-  calc(globalVars: T, constants: ConstantsType, activeIndex: number): O {
+  calc(globalVars: T, constants: ConstantsType, activeIndex: number): StyleSheetType<P> {
     this.clearResult();
     this.calcStyles(globalVars, constants, activeIndex);
-    this.calcNative();
     return this.getResult();
   }
 
-  getResult(): O {
+  getResult(): StyleSheetType<P> {
     return this.result;
   }
 
@@ -57,18 +52,6 @@ export default class Sheet<
         // @ts-ignore
         this.result[key] = styles;
       });
-    }
-  }
-
-  calcStyle(key: string, styleProps: any): void {
-    // @ts-ignore
-    this.nativeSheet[key] = styleProps;
-  }
-
-  calcNative(): void {
-    if (Object.keys(this.result).length) {
-      const rnStyleSheet = StyleSheet.create(this.nativeSheet);
-      Object.assign(this.result, rnStyleSheet);
     }
   }
 }

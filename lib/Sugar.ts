@@ -145,16 +145,18 @@ export default class Sugar<T> {
     this._refresh();
   }
 
-  create<P extends NamedStyles<P> | NamedStyles<any>>(objFn: Fn<T, P>): P {
+  create<P extends NamedStyles<P> | NamedStyles<any>>(
+    objFn: Fn<T, P>
+  ): StyleSheetType<P> {
     if (typeof objFn === 'function') {
       const sheet = new Sheet(objFn);
       this.sheets.push(sheet);
       if (this.builded) {
         sheet.calc(this.theme, this.constants, this.activeIndex);
       }
-      return sheet.getResult() as P;
+      return sheet.getResult() as StyleSheetType<P>;
     }
-    return objFn as P;
+    return objFn as StyleSheetType<P>;
   }
 
   _calculateActiveIndex(): void {

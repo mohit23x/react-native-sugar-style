@@ -1,16 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_native_1 = require("react-native");
 class Sheet {
     constructor(sourceFn) {
-        this.nativeSheet = {};
         this.source = sourceFn;
         this.result = {};
     }
     calc(globalVars, constants, activeIndex) {
         this.clearResult();
         this.calcStyles(globalVars, constants, activeIndex);
-        this.calcNative();
         return this.getResult();
     }
     getResult() {
@@ -43,16 +40,6 @@ class Sheet {
                 // @ts-ignore
                 this.result[key] = styles;
             });
-        }
-    }
-    calcStyle(key, styleProps) {
-        // @ts-ignore
-        this.nativeSheet[key] = styleProps;
-    }
-    calcNative() {
-        if (Object.keys(this.result).length) {
-            const rnStyleSheet = react_native_1.StyleSheet.create(this.nativeSheet);
-            Object.assign(this.result, rnStyleSheet);
         }
     }
 }
