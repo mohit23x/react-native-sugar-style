@@ -21,10 +21,7 @@ export type NamedStyles<T> = {
 
 export type S = NamedStyles<any>;
 
-export type Fn<T, P> = (
-  theme: T,
-  constants: ConstantsType
-) => P extends NamedStyles<P> ? NamedStyles<P> : P;
+export type Fn<T, P> = (theme: T, constants: ConstantsType) => P;
 
 export type StyleSheetType<P> = {
   [K in keyof P]: {
