@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const SKIP_KEYS = ["transform", "transformMatrix"];
 class Sheet {
     constructor(sourceFn) {
         this.source = sourceFn;
@@ -25,7 +26,7 @@ class Sheet {
                 const styles = restyle[key];
                 Object.keys(styles).forEach((styleKey) => {
                     const styleValue = styles[styleKey];
-                    if (styleValue && Array.isArray(styleValue)) {
+                    if (styleValue && Array.isArray(styleValue) && !SKIP_KEYS.includes(styleKey)) {
                         // length is checked to allow undefined to set as styleValue
                         if (activeIndex >= styleValue.length) {
                             const selectedValue = styleValue[styleValue.length - 1];
