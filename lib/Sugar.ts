@@ -146,7 +146,7 @@ export default class Sugar<T> {
   }
 
   create<P extends NamedStyles<P> | NamedStyles<any>>(
-    objFn: Fn<T, P>
+    objFn: Fn<T, P> | P
   ): StyleSheetType<P> {
     if (typeof objFn === 'function') {
       const sheet = new Sheet(objFn);

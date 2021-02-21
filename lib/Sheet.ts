@@ -1,5 +1,6 @@
 import type { ConstantsType, Fn, NamedStyles, StyleSheetType } from './type';
 
+const SKIP_KEYS = ["transform", "transformMatrix"];
 export default class Sheet<
   T,
   P extends NamedStyles<P> | NamedStyles<any>> {
@@ -38,7 +39,7 @@ export default class Sheet<
         const styles = restyle[key];
         Object.keys(styles).forEach((styleKey) => {
           const styleValue = styles[styleKey];
-          if (styleValue && Array.isArray(styleValue)) {
+          if (styleValue && Array.isArray(styleValue) && !SKIP_KEYS.includes(styleKey)) {
             // length is checked to allow undefined to set as styleValue
             if (activeIndex >= styleValue.length) {
               const selectedValue = styleValue[styleValue.length - 1];
