@@ -44,7 +44,7 @@ const light = {
   text: '#000000',
 };
 
-export const { StyleSheet, ThemeProvider, useTheme } = Sugar(theme);
+export const { StyleSheet, ThemeProvider, useTheme } = Sugar(light);
 
 export default StyleSheet;
 ```
