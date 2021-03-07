@@ -18,7 +18,7 @@ function createThemeProvider<T>(
     children,
   }) => {
     const [theme, setTheme] = React.useState(defaultTheme);
-    const [constants, setConstants] = React.useState(defaultConstants);
+    const [constants, setConstants] = React.useState(defaultConstants);  
 
     const subscribeToThemeChanges = () => {
       sugar.subscribe('build', () => {
@@ -83,7 +83,11 @@ export function themeCreator<T>(sugar: Sugar<T>, defaultTheme: T) {
   const ThemeProvider = createThemeProvider(sugar, ThemeContext, defaultTheme);
   function useTheme() {
     const { theme, constants } = React.useContext(ThemeContext);
-    
+
+    if (ThemeContext === undefined) {
+      throw new Error('useTheme must be used within a ThemeProvider');
+    }
+  
     return [theme, constants];
   }
   function withTheme<P extends ThemeProp<T>>(
