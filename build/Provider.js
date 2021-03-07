@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.themeCreator = void 0;
-const just_debounce_1 = require("just-debounce");
 const React = require("react");
 const react_native_1 = require("react-native");
 const Constant_1 = require("./Constant");
@@ -34,7 +33,7 @@ function createThemeProvider(sugar, ThemeContext, defaultTheme) {
             sugar.configure(newValues);
         };
         const subscribeToDimensionsChange = () => {
-            react_native_1.Dimensions.addEventListener('change', () => just_debounce_1.default(onDimensionChange, 500));
+            react_native_1.Dimensions.addEventListener('change', onDimensionChange);
         };
         React.useEffect(() => {
             subscribeToThemeChanges();

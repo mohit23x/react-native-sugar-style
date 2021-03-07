@@ -1,4 +1,3 @@
-import debounce from 'just-debounce';
 import * as React from 'react';
 import { Dimensions, ScaledSize } from 'react-native';
 import {
@@ -56,7 +55,7 @@ function createThemeProvider<T>(
     };
 
     const subscribeToDimensionsChange = () => {
-      Dimensions.addEventListener('change', () => debounce(onDimensionChange, 500));
+      Dimensions.addEventListener('change', onDimensionChange);
     };
 
 
