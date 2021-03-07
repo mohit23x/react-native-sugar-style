@@ -18,13 +18,15 @@ function createThemeProvider<T>(
     children,
   }) => {
     const [theme, setTheme] = React.useState(defaultTheme);
-    const [constants, setConstants] = React.useState(defaultConstants);  
+    const [constants, setConstants] = React.useState(defaultConstants);
+    
+    const onBuild = () => {
+      setTheme(sugar.theme);
+      setConstants(sugar.constants);
+    }
 
     const subscribeToThemeChanges = () => {
-      sugar.subscribe('build', () => {
-        setTheme(sugar.theme);
-        setConstants(sugar.constants);
-      });
+      sugar.subscribe('build', onBuild);
     };
 
     const onDimensionChange = ({
@@ -62,6 +64,7 @@ function createThemeProvider<T>(
       subscribeToDimensionsChange();
       return () => {
         Dimensions.removeEventListener('change', onDimensionChange);
+        sugar.unsubscribe('build', onBuild);
       };
     }, []);
 
