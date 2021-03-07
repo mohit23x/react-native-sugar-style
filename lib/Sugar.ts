@@ -194,6 +194,13 @@ export default class Sugar<T> {
     }
   }
 
+  unsubscribe(event: BuildEventType, listener: () => any): void {
+    this._assertSubscriptionParams(event, listener);
+    if (this.listeners[BUILD_EVENT]) {
+      this.listeners[BUILD_EVENT].filter((item: any) => item !== listener);
+    }
+  }
+
   _assertSubscriptionParams(event: BuildEventType, listener: any) {
     if (event !== BUILD_EVENT) {
       throw new Error(`Only '${BUILD_EVENT}' event is currently supported.`);
