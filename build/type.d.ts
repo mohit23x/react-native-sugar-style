@@ -22,7 +22,7 @@ export declare type StyleSheetType<P> = {
         [J in keyof P[K]]: P[K][J] extends Array<any> ? J extends 'transform' | 'transformMatrix' ? P[K][J] : P[K][J][number] : P[K][J];
     };
 };
-export declare type buildEventType = 'build';
+export declare type BuildEventType = 'build';
 export declare type ThemeProp<T> = {
     theme: T;
     constants: ConstantsType;
