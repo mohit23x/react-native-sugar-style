@@ -16,7 +16,7 @@ export declare type NamedStyles<T> = {
     [P in keyof T]: SugarViewStyle | SugarTextStyle | SugarImageStyle;
 };
 export declare type S = NamedStyles<any>;
-export declare type Fn<T, P> = (theme: T, constants: ConstantsType) => P extends NamedStyles<P> ? NamedStyles<P> : P;
+export declare type Fn<T, P> = (theme: T, constants: ConstantsType) => P;
 export declare type StyleSheetType<P> = {
     [K in keyof P]: {
         [J in keyof P[K]]: P[K][J] extends Array<any> ? J extends 'transform' | 'transformMatrix' ? P[K][J] : P[K][J][number] : P[K][J];

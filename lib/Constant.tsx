@@ -55,7 +55,7 @@ const platform = {
   ios: Platform.OS === "ios",
   web: Platform.OS === "web",
   windows: Platform.OS === "windows",
-  isPad: Platform.isPad,
+  isPad: Platform.OS === "ios" ? Platform.isPad : false,
   isTv: Platform.isTV,
   isIPhoneX,
 } as const;

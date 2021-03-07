@@ -13,12 +13,14 @@ export default function Main<T>(theme: T): {
             readonly navBarHeight: number;
             readonly isNavBarVisible: boolean;
             readonly visibleHeight: number;
-            readonly isIPhoneX: () => boolean;
-            readonly os: {
+            readonly platform: {
                 readonly android: boolean;
                 readonly ios: boolean;
                 readonly web: boolean;
                 readonly windows: boolean;
+                readonly isPad: boolean;
+                readonly isTv: boolean;
+                readonly isIPhoneX: () => boolean;
             };
             readonly breakPoints: {
                 mobile: number;
@@ -27,10 +29,7 @@ export default function Main<T>(theme: T): {
             };
         };
     }>;
-    ThemeProvider: import("react").ComponentType<{
-        children: import("react").ReactNode;
-        sugar?: Sugar<T> | undefined;
-    }>;
+    ThemeProvider: import("./type").ThemeProviderType<T>;
     useTheme: () => ({
         readonly height: number;
         readonly width: number;
@@ -40,12 +39,14 @@ export default function Main<T>(theme: T): {
         readonly navBarHeight: number;
         readonly isNavBarVisible: boolean;
         readonly visibleHeight: number;
-        readonly isIPhoneX: () => boolean;
-        readonly os: {
+        readonly platform: {
             readonly android: boolean;
             readonly ios: boolean;
             readonly web: boolean;
             readonly windows: boolean;
+            readonly isPad: boolean;
+            readonly isTv: boolean;
+            readonly isIPhoneX: () => boolean;
         };
         readonly breakPoints: {
             mobile: number;
