@@ -13,7 +13,7 @@ https://www.npmjs.com/package/react-native-sugar-style (🧪 Experimental)
 
 | BEFORE                                | AFTER                              |
 | ------------------------------------- | ---------------------------------- |
-| ![Before](assets/before.png 'Before') | ![After](assets/after.png 'After') |
+| ![Before](assets/before.png "Before") | ![After](assets/after.png "After") |
 
 ### Install
 
@@ -32,16 +32,16 @@ STEP 1: **style.tsx**
 Define configurations for your theme, for more verbose example see [this file](https://github.com/mohit23x/react-native-sugar-style/blob/main/example/style/index.tsx).
 
 ```typescript
-import Sugar from 'react-native-sugar-style';
+import Sugar from "react-native-sugar-style";
 
 const dark = {
-  background: '#2b2b2b',
-  text: '#ffffff',
+  background: "#2b2b2b",
+  text: "#ffffff",
 };
 
 const light = {
-  background: '#fbfbfb',
-  text: '#000000',
+  background: "#fbfbfb",
+  text: "#000000",
 };
 
 export const { StyleSheet, ThemeProvider, useTheme } = Sugar(light);
@@ -74,9 +74,9 @@ STEP 3: **component.tsx**
 Use StyleSheet as you do normally do in components
 
 ```javascript
-import React from 'react';
-import { View, Text } from 'react-native';
-import { StyleSheet, useTheme } from './style';
+import React from "react";
+import { View, Text } from "react-native";
+import { StyleSheet, useTheme } from "./style";
 
 const Component = () => {
   useTheme();
@@ -93,7 +93,7 @@ const styles = StyleSheet.create((theme, constants) => ({
     height: constants.height,
     width: constants.width,
     backgroundColor: theme.background,
-    flexDirection: ['column', 'row'],
+    flexDirection: ["column", "row"],
   },
   text: {
     fontSize: theme.size.m,
@@ -111,9 +111,9 @@ STEP 4: **anotherComponent.tsx**
 To change the theme you can call build method and it will swap the theme
 
 ```javascript
-import React from 'react';
-import { View, Button } from 'react-native';
-import { StyleSheet, light, dark } from './style';
+import React from "react";
+import { View, Button } from "react-native";
+import { StyleSheet, light, dark } from "./style";
 
 const Component = () => {
   const onLight = () => StyleSheet.build(light);
@@ -133,24 +133,23 @@ const Component = () => {
 Scan and run with expo go app, run the [example project](https://github.com/mohit23x/react-native-sugar-style/tree/main/example) for a more detailed example.
 https://expo.io/@mohit23x/projects/react-native-sugar-style or try the [react native web version](https://sugar-style.netlify.app/)
 
-![Scan QR with expo app](assets/qr.png 'Scan QR')
+![Scan QR with expo app](assets/qr.png "Scan QR")
 
 ### Constants
 
 Available as **theme.constant**
 
-| Name                                   | Type    | React Native way                           |
-| -------------------------------------- | ------- | ------------------------------------------ |
-| height                                 | number  | const {height} = Dimensions.get('window'); |
-| width                                  | number  | const {width} = Dimensions.get('window');  |
-| screenHeight                           | number  | const {height} = Dimensions.get('screen'); |
-| screenWidth                            | number  | const {width} = Dimensions.get('screen');  |
-| statusBarHeight                        | number  | StatusBar.currentHeight                    |
-| navBarHeight                           | number  | screenHeight - statusBarHeight - height    |
-| isNavBarVisible                        | boolean | bottom navigation is visible or not        |
-| visibleHeight                          | number  | height - navBarHeight                      |
-| isIPhoneX                              | boolean |                                            |
-| platform: {android, ios, windows, web} | boolean | Platform.OS === 'android'                  |
+| Name                                                          | Type    | React Native way                           |
+| ------------------------------------------------------------- | ------- | ------------------------------------------ |
+| height                                                        | number  | const {height} = Dimensions.get('window'); |
+| width                                                         | number  | const {width} = Dimensions.get('window');  |
+| screenHeight                                                  | number  | const {height} = Dimensions.get('screen'); |
+| screenWidth                                                   | number  | const {width} = Dimensions.get('screen');  |
+| statusBarHeight                                               | number  | StatusBar.currentHeight                    |
+| navBarHeight                                                  | number  | screenHeight - statusBarHeight - height    |
+| isNavBarVisible                                               | boolean | bottom navigation is visible or not        |
+| visibleHeight                                                 | number  | height - navBarHeight                      |
+| platform: {android, ios, windows, web, isPad, isTv,isIPhoneX} | boolean | Platform.OS === 'android'                  |
 
 ### Why this package?
 

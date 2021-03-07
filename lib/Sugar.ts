@@ -1,15 +1,15 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
+import { constants } from "./Constant";
+import Sheet from "./Sheet";
 import {
-  Fn,
-  buildEventType,
-  NamedStyles,
+  BuildEventType,
   ConstantsType,
+  Fn,
+  NamedStyles,
   StyleSheetType,
-} from './type';
-import Sheet from './Sheet';
-import { constants } from './Constant';
+} from "./type";
 
-const BUILD_EVENT = 'build' as const;
+const BUILD_EVENT = "build" as const;
 
 export default class Sugar<T> {
   public builded: boolean;
@@ -148,7 +148,7 @@ export default class Sugar<T> {
   create<P extends NamedStyles<P> | NamedStyles<any>>(
     objFn: Fn<T, P> | P
   ): P extends NamedStyles<P> ? StyleSheetType<P> : P {
-    if (typeof objFn === 'function') {
+    if (typeof objFn === "function") {
       const sheet = new Sheet(objFn);
       this.sheets.push(sheet);
       if (this.builded) {
@@ -179,13 +179,13 @@ export default class Sugar<T> {
     );
   }
 
-  _callListeners(event: buildEventType): void {
+  _callListeners(event: BuildEventType): void {
     if (Array.isArray(this.listeners[event])) {
       this.listeners[event].forEach((listener: any) => listener());
     }
   }
 
-  subscribe(event: buildEventType, listener: () => any): void {
+  subscribe(event: BuildEventType, listener: () => any): void {
     this._assertSubscriptionParams(event, listener);
     this.listeners[BUILD_EVENT] = this.listeners[BUILD_EVENT] || [];
     this.listeners[BUILD_EVENT].push(listener);
@@ -194,12 +194,19 @@ export default class Sugar<T> {
     }
   }
 
-  _assertSubscriptionParams(event: buildEventType, listener: any) {
+  unsubscribe(event: BuildEventType, listener: () => any): void {
+    this._assertSubscriptionParams(event, listener);
+    if (this.listeners[BUILD_EVENT]) {
+      this.listeners[BUILD_EVENT].filter((item: any) => item !== listener);
+    }
+  }
+
+  _assertSubscriptionParams(event: BuildEventType, listener: any) {
     if (event !== BUILD_EVENT) {
       throw new Error(`Only '${BUILD_EVENT}' event is currently supported.`);
     }
-    if (typeof listener !== 'function') {
-      throw new Error('Listener should be a function.');
+    if (typeof listener !== "function") {
+      throw new Error("Listener should be a function.");
     }
   }
 }

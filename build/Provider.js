@@ -9,11 +9,12 @@ function createThemeProvider(sugar, ThemeContext, defaultTheme) {
     const ThemeProvider = ({ children, }) => {
         const [theme, setTheme] = React.useState(defaultTheme);
         const [constants, setConstants] = React.useState(Constant_1.constants);
+        const onBuild = () => {
+            setTheme(sugar.theme);
+            setConstants(sugar.constants);
+        };
         const subscribeToThemeChanges = () => {
-            sugar.subscribe('build', () => {
-                setTheme(sugar.theme);
-                setConstants(sugar.constants);
-            });
+            sugar.subscribe('build', onBuild);
         };
         const onDimensionChange = ({ window: { height, width }, screen: { height: screenHeight, width: screenWidth }, }) => {
             const navBarHeight = Constant_1.calculateNavBarHeight({
@@ -39,6 +40,7 @@ function createThemeProvider(sugar, ThemeContext, defaultTheme) {
             subscribeToDimensionsChange();
             return () => {
                 react_native_1.Dimensions.removeEventListener('change', onDimensionChange);
+                sugar.unsubscribe('build', onBuild);
             };
         }, []);
         return (<ThemeContext.Provider value={{ theme, constants }}>{children}</ThemeContext.Provider>);
@@ -57,9 +59,9 @@ function themeCreator(sugar, defaultTheme) {
         return function WithTheme() {
             return (<ThemeContext.Consumer>
           {({ theme, constants }) => {
-                const props = { theme, constants };
-                return <WrappedComponent {...props}/>;
-            }}
+                    const props = { theme, constants };
+                    return <WrappedComponent {...props}/>;
+                }}
         </ThemeContext.Consumer>);
         };
     }

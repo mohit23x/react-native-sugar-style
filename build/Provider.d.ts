@@ -1,15 +1,12 @@
 import * as React from 'react';
 import Sugar from './Sugar';
-import type { ThemeProp, ConstantsType } from './type';
+import type { ConstantsType, ThemeProp, ThemeProviderType } from './type';
 export declare function themeCreator<T>(sugar: Sugar<T>, defaultTheme: T): {
     ThemeContext: React.Context<{
         theme: T;
         constants: ConstantsType;
     }>;
-    ThemeProvider: React.ComponentType<{
-        children: React.ReactNode;
-        sugar?: Sugar<T> | undefined;
-    }>;
+    ThemeProvider: ThemeProviderType<T>;
     useTheme: () => ({
         readonly height: number;
         readonly width: number;
@@ -19,12 +16,14 @@ export declare function themeCreator<T>(sugar: Sugar<T>, defaultTheme: T): {
         readonly navBarHeight: number;
         readonly isNavBarVisible: boolean;
         readonly visibleHeight: number;
-        readonly isIPhoneX: () => boolean;
-        readonly os: {
+        readonly platform: {
             readonly android: boolean;
             readonly ios: boolean;
             readonly web: boolean;
             readonly windows: boolean;
+            readonly isPad: boolean;
+            readonly isTv: boolean;
+            readonly isIPhoneX: () => boolean;
         };
         readonly breakPoints: {
             mobile: number;

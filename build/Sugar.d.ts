@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { Fn, buildEventType, NamedStyles, ConstantsType, StyleSheetType } from './type';
-import Sheet from './Sheet';
+import { StyleSheet } from "react-native";
+import Sheet from "./Sheet";
+import { BuildEventType, ConstantsType, Fn, NamedStyles, StyleSheetType } from "./type";
 export default class Sugar<T> {
     builded: boolean;
     theme: T;
@@ -99,10 +99,11 @@ export default class Sugar<T> {
     _refresh(): void;
     build(themeObj: T): void;
     configure(newConstants: Partial<ConstantsType>): void;
-    create<P extends NamedStyles<P> | NamedStyles<any>>(objFn: Fn<T, P> | P): StyleSheetType<P>;
+    create<P extends NamedStyles<P> | NamedStyles<any>>(objFn: Fn<T, P> | P): P extends NamedStyles<P> ? StyleSheetType<P> : P;
     _calculateActiveIndex(): void;
     _calcSheets(): void;
-    _callListeners(event: buildEventType): void;
-    subscribe(event: buildEventType, listener: () => any): void;
-    _assertSubscriptionParams(event: buildEventType, listener: any): void;
+    _callListeners(event: BuildEventType): void;
+    subscribe(event: BuildEventType, listener: () => any): void;
+    unsubscribe(event: BuildEventType, listener: () => any): void;
+    _assertSubscriptionParams(event: BuildEventType, listener: any): void;
 }

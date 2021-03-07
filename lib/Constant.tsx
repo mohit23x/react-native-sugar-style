@@ -1,5 +1,5 @@
-import { Dimensions, Platform, StatusBar } from 'react-native';
-const { height, width } = Dimensions.get('window');
+import { Dimensions, Platform, StatusBar } from "react-native";
+const { height, width } = Dimensions.get("window");
 
 /* =========== */
 // code credits: https://medium.com/codespace69/reactnative-ios-android-detect-screen-notch-status-bar-device-info-dc11b8c6a6a3
@@ -9,7 +9,7 @@ const XSMAX_WIDTH = 414;
 const XSMAX_HEIGHT = 896;
 
 const isIPhoneX = () =>
-  Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS
+  Platform.OS === "ios" && !Platform.isPad && !Platform.isTVOS
     ? (width === X_WIDTH && height === X_HEIGHT) ||
       (width === XSMAX_WIDTH && height === XSMAX_HEIGHT)
     : false;
@@ -21,7 +21,7 @@ const statusBarHeight = Platform.select({
 });
 /* ====== x ====== */
 
-const { height: screenHeight, width: screenWidth } = Dimensions.get('screen');
+const { height: screenHeight, width: screenWidth } = Dimensions.get("screen");
 
 export const calculateNavBarHeight = ({
   screenHeight,
@@ -50,11 +50,14 @@ export const calculateVisibleHeight = ({
 
 const visibleHeight = calculateVisibleHeight({ height, navBarHeight });
 
-const os = {
-  android: Platform.OS === 'android',
-  ios: Platform.OS === 'ios',
-  web: Platform.OS === 'web',
-  windows: Platform.OS === 'windows',
+const platform = {
+  android: Platform.OS === "android",
+  ios: Platform.OS === "ios",
+  web: Platform.OS === "web",
+  windows: Platform.OS === "windows",
+  isPad: Platform.OS === "ios" ? Platform.isPad : false,
+  isTv: Platform.isTV,
+  isIPhoneX,
 } as const;
 
 const breakPoints = {
@@ -72,7 +75,6 @@ export const constants = {
   navBarHeight,
   isNavBarVisible,
   visibleHeight,
-  isIPhoneX,
-  os,
+  platform,
   breakPoints,
 } as const;

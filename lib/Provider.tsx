@@ -3,10 +3,10 @@ import { Dimensions, ScaledSize } from 'react-native';
 import {
   calculateNavBarHeight,
   calculateVisibleHeight,
-  constants as defaultConstants,
+  constants as defaultConstants
 } from './Constant';
 import Sugar from './Sugar';
-import type { ThemeProp, ThemeProviderType, ConstantsType } from './type';
+import type { ConstantsType, ThemeProp, ThemeProviderType } from './type';
 
 /* PROVIDER */
 function createThemeProvider<T>(
@@ -19,12 +19,14 @@ function createThemeProvider<T>(
   }) => {
     const [theme, setTheme] = React.useState(defaultTheme);
     const [constants, setConstants] = React.useState(defaultConstants);
+    
+    const onBuild = () => {
+      setTheme(sugar.theme);
+      setConstants(sugar.constants);
+    }
 
     const subscribeToThemeChanges = () => {
-      sugar.subscribe('build', () => {
-        setTheme(sugar.theme);
-        setConstants(sugar.constants);
-      });
+      sugar.subscribe('build', onBuild);
     };
 
     const onDimensionChange = ({
@@ -62,6 +64,7 @@ function createThemeProvider<T>(
       subscribeToDimensionsChange();
       return () => {
         Dimensions.removeEventListener('change', onDimensionChange);
+        sugar.unsubscribe('build', onBuild);
       };
     }, []);
 
@@ -82,7 +85,7 @@ export function themeCreator<T>(sugar: Sugar<T>, defaultTheme: T) {
 
   const ThemeProvider = createThemeProvider(sugar, ThemeContext, defaultTheme);
   function useTheme() {
-    const {theme, constants} = React.useContext(ThemeContext);
+    const { theme, constants } = React.useContext(ThemeContext);
     return [theme, constants];
   }
   function withTheme<P extends ThemeProp<T>>(

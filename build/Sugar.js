@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_native_1 = require("react-native");
-const Sheet_1 = require("./Sheet");
 const Constant_1 = require("./Constant");
-const BUILD_EVENT = 'build';
+const Sheet_1 = require("./Sheet");
+const BUILD_EVENT = "build";
 class Sugar {
     constructor(newTheme) {
         this.builded = true;
@@ -35,7 +35,7 @@ class Sugar {
         this._refresh();
     }
     create(objFn) {
-        if (typeof objFn === 'function') {
+        if (typeof objFn === "function") {
             const sheet = new Sheet_1.default(objFn);
             this.sheets.push(sheet);
             if (this.builded) {
@@ -72,12 +72,18 @@ class Sugar {
             listener();
         }
     }
+    unsubscribe(event, listener) {
+        this._assertSubscriptionParams(event, listener);
+        if (this.listeners[BUILD_EVENT]) {
+            this.listeners[BUILD_EVENT].filter((item) => item !== listener);
+        }
+    }
     _assertSubscriptionParams(event, listener) {
         if (event !== BUILD_EVENT) {
             throw new Error(`Only '${BUILD_EVENT}' event is currently supported.`);
         }
-        if (typeof listener !== 'function') {
-            throw new Error('Listener should be a function.');
+        if (typeof listener !== "function") {
+            throw new Error("Listener should be a function.");
         }
     }
 }

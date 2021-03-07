@@ -33,7 +33,7 @@ export type StyleSheetType<P> = {
   };
 };
 
-export type buildEventType = 'build';
+export type BuildEventType = 'build';
 
 export type ThemeProp<T> = {
   theme: T;
