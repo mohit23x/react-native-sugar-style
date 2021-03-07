@@ -1,3 +1,4 @@
+import debounce from 'just-debounce';
 import * as React from 'react';
 import { Dimensions, ScaledSize } from 'react-native';
 import {
@@ -55,7 +56,7 @@ function createThemeProvider<T>(
     };
 
     const subscribeToDimensionsChange = () => {
-      Dimensions.addEventListener('change', onDimensionChange);
+      Dimensions.addEventListener('change', () => debounce(onDimensionChange, 500));
     };
 
 
@@ -86,11 +87,6 @@ export function themeCreator<T>(sugar: Sugar<T>, defaultTheme: T) {
   const ThemeProvider = createThemeProvider(sugar, ThemeContext, defaultTheme);
   function useTheme() {
     const { theme, constants } = React.useContext(ThemeContext);
-
-    if (ThemeContext === undefined) {
-      throw new Error('useTheme must be used within a ThemeProvider');
-    }
-  
     return [theme, constants];
   }
   function withTheme<P extends ThemeProp<T>>(
