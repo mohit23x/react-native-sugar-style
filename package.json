@@ -21,7 +21,7 @@
   ],
   "devDependencies": {
     "@types/react": "^17.0.0",
-    "@types/react-native": "^0.63.46",
+    "@types/react-native": "^0.64.0",
     "eslint-config-react-native-typescript": "^2.2.5",
     "prettier": "2.2.1",
     "ts-node": "^8.5.0",
