@@ -69,7 +69,7 @@ const Component = () => {
   );
 };
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create((theme, constants) => ({
   container: {
     height: constants.height,
     width: constants.width,
